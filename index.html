@@ -81,8 +81,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .grow-card{display:flex;align-items:center;gap:14px;text-align:left}
 .grow-icon{flex-shrink:0;width:74px;display:flex;align-items:center;justify-content:center}
 .grow-icon img{width:100%;height:auto;display:block}
-.grow-head{font-size:15px;font-weight:800;color:var(--text);margin-bottom:7px}
+.grow-head{font-size:15px;font-weight:800;color:var(--text);margin-bottom:12px}
 .grow-text p{font-size:12.5px;line-height:1.75;color:var(--text-sub);margin:0}
+.grow-text p+p{margin-top:11px}
 .grow-text b{color:var(--brand-dark)}
 .grow-sub{font-size:11px;line-height:1.6;color:var(--text-light);margin-top:8px!important}
 .cta-head{font-size:16px;font-weight:800;color:var(--text);line-height:1.55}
@@ -412,7 +413,8 @@ function buildResultHTML(r){
         <div class="grow-icon"><img src="piggy.png" alt=""></div>
         <div class="grow-text">
           <div class="grow-head">タックスナップなら<br>これよりもっと取り戻せる</div>
-          <p>実はこれ、<b>今年分“だけ”</b>の金額です。<br>タックスナップなら<br><b>過去3年分まで</b>さかのぼって申告できるため、<br>取り戻せるお金がもっと増える可能性も。</p>
+          <p>実はこれ、<b>今年分“だけ”</b>の金額です。</p>
+          <p>タックスナップなら<br><b>過去3年分まで</b>さかのぼって申告できるため、<br>取り戻せるお金がもっと増えるかも。</p>
         </div>
       </div>
       <div class="caution">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</div>`;
