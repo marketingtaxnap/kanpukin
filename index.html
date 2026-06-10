@@ -66,11 +66,37 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .result-headline .amount{font-size:46px;font-weight:800;color:var(--brand);line-height:1.1;margin:6px 0}
 .result-headline .amount.zero{color:var(--text-light)}
 .result-headline .amount-note{font-size:14px;font-weight:700;color:var(--brand)}
+.result-headline .amount-note .an-dim{color:var(--text-sub);font-weight:500}
+.result-headline .amount-note .an-pop{color:var(--brand);font-weight:800}
 .result-headline .amount-note.muted{color:var(--text-sub)}
 .result-card{background:var(--card);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);margin-top:16px}
 .result-card .rc-title{font-size:15px;font-weight:700;margin-bottom:14px;text-align:center}
 .result-card p{font-size:13.5px;line-height:1.8;color:var(--text-sub)}
 .result-card .reassure{background:var(--brand-light);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.7;color:var(--brand-dark);font-weight:500;margin-top:14px}
+.hl-card{background:var(--brand-light);border:1.5px solid rgba(39,186,116,.35)}
+.hl-card p{color:var(--text);font-size:14.5px;font-weight:500}
+.hl-card b{color:var(--brand-dark)}
+.result-card .em{color:var(--brand);font-weight:700}
+.caution{background:#fff8e1;border:1px solid #f0d98a;border-radius:10px;padding:11px 14px;font-size:12px;color:#8a6d2e;line-height:1.7;margin-top:14px;font-weight:500}
+.grow-card{display:flex;align-items:center;gap:14px;text-align:left}
+.grow-icon{flex-shrink:0;width:74px;display:flex;align-items:center;justify-content:center}
+.grow-icon img{width:100%;height:auto;display:block}
+.grow-head{font-size:15px;font-weight:800;color:var(--text);margin-bottom:7px}
+.grow-text p{font-size:12.5px;line-height:1.75;color:var(--text-sub);margin:0}
+.grow-text b{color:var(--brand-dark)}
+.cta-head{font-size:16px;font-weight:800;color:var(--text);line-height:1.55}
+.cta-head .hl{color:var(--brand)}
+.cta-card .cta-card-top{display:flex;align-items:center;gap:14px;text-align:left;margin-bottom:16px}
+.cta-card .cta-btn{margin-top:0}
+.points-toggle{text-align:center;cursor:pointer;margin-top:18px;padding:4px 0}
+.pt-lead{font-size:12px;color:var(--text-sub);font-weight:700;margin-bottom:5px}
+.pt-title{font-size:14.5px;font-weight:800;color:var(--brand-dark);display:inline-flex;align-items:center;gap:9px;justify-content:center}
+.pt-deco{color:var(--brand);font-weight:800;transform:scaleY(1.4)}
+.pt-chev{display:block;color:var(--brand-dark);font-size:20px;font-weight:900;margin-top:3px;transition:transform .25s}
+.points-toggle.open .pt-chev{transform:rotate(180deg)}
+.points-body{margin-top:14px;margin-bottom:30px}
+.points-body.hidden{display:none}
+.points-body img{width:100%;height:auto;display:block;border-radius:12px}
 .bar-block{margin:6px 0 4px}
 .bar-label{font-size:12px;color:var(--text-sub);margin:10px 0 4px;font-weight:700}
 .bar-track{height:30px;border-radius:8px;background:#eee;overflow:hidden;position:relative}
@@ -78,16 +104,31 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .bar-fill.you{background:var(--brand)}
 .bar-fill.avg{background:#888}
 .bar-cap{font-size:11px;color:var(--text-light);margin-top:6px}
+.bar-note{margin-top:16px;padding-top:15px;border-top:1px solid #eee;font-size:13.5px;line-height:1.8;color:var(--text-sub)}
+.bar-note b{color:var(--text)}
+.wavy{text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--brand);text-decoration-thickness:1.5px;text-underline-offset:4px}
 .cta-btn{display:block;width:100%;padding:18px;background:var(--brand);color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:800;text-align:center;text-decoration:none;margin-top:20px;box-shadow:0 4px 16px rgba(39,186,116,.3);transition:transform .15s}
 .cta-btn:hover{transform:translateY(-2px)}
 .cta-sub{text-align:center;font-size:12px;color:var(--text-light);margin-top:10px}
 .notes{margin-top:12px;font-size:11px;color:var(--text-light);line-height:1.7;background:#f0f2f5;border-radius:10px;padding:12px 14px}
 .notes p{margin-bottom:4px}
 .notes p:last-child{margin-bottom:0}
+.notes p.warn{color:#d23b3b;font-weight:700}
+.cta-lead{font-size:13.5px;font-weight:700;color:var(--text-sub);line-height:1.6;margin-bottom:14px}
 .notes-bar{text-align:center;margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;width:100%}
 .help-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#cfd6dd;color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
 .help-label{font-size:12px;color:var(--text-light)}
 .notes-bar:hover .help-icon{background:var(--text-light)}
+.info-card{background:#fdf6e3;border:1px solid #efe0b4;border-radius:12px;margin-top:10px;overflow:hidden;text-align:left}
+.info-head{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.info-i{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#d6a93f;color:#fff;font-size:13px;font-weight:700;font-style:italic;display:flex;align-items:center;justify-content:center}
+.info-title{flex:1;font-size:13px;font-weight:700;color:#7a5c1e}
+.info-chev{color:#bfa45a;font-size:13px;transition:transform .25s}
+.info-card.open .info-chev{transform:rotate(180deg)}
+.info-body{padding:0 14px 13px 46px;font-size:11.5px;line-height:1.7;color:#8a6d2e}
+.info-body.hidden{display:none}
+.info-body p{margin-bottom:5px}
+.info-body p:last-child{margin-bottom:0}
 .hidden{display:none!important}
 </style>
 </head>
@@ -248,6 +289,7 @@ function go(i){
   if(SLIDES[i]==='result') renderResult();
 }
 function toggleNotes(){ document.getElementById('notesBox').classList.toggle('hidden'); }
+function togglePoints(){ document.getElementById('pointsBox').classList.toggle('hidden'); document.getElementById('pointsToggle').classList.toggle('open'); }
 function next(){ go(idx+1); }
 function back(){ go(idx-1); }
 
@@ -321,56 +363,76 @@ function renderResult(){
 }
 
 const yen = n => '¥' + Math.round(n).toLocaleString();
-function ratioBar(r){
+function ratioBar(r, footer=''){
   const you = Math.round((r.expenseRatio||0)*100);
   const avg = Math.round((r.avgRatio||0.45)*100);
   return `<div class="result-card"><div class="rc-title">経費割合（収入のうち経費の割合）</div>
     <div class="bar-block"><div class="bar-label">あなた</div><div class="bar-track"><div class="bar-fill you" style="width:${Math.max(you,12)}%">${you}%</div></div></div>
-    <div class="bar-block"><div class="bar-label">夜のお仕事の平均</div><div class="bar-track"><div class="bar-fill avg" style="width:${Math.max(avg,12)}%">${avg}%</div></div></div>
-    <div class="bar-cap">※平均はタックスナップ利用者の平均値です</div></div>`;
+    <div class="bar-block"><div class="bar-label">夜職の平均</div><div class="bar-track"><div class="bar-fill avg" style="width:${Math.max(avg,12)}%">${avg}%</div></div></div>
+    <div class="bar-cap">※平均はタックスナップ利用者の平均値です</div>${footer}</div>`;
 }
-const NOTES = `<div class="notes-bar" onclick="toggleNotes()"><span class="help-icon">？</span><span class="help-label">表示額について</span></div>
+const NOTES = (genzei=true) => `<div class="notes-bar" onclick="toggleNotes()"><span class="help-icon">？</span><span class="help-label">表示額について</span></div>
   <div class="notes hidden" id="notesBox"><p>※表示額は、今年分のおおよその概算です。あくまで目安のため、実際の金額とは誤差が生じる可能性があります。</p>
-  <p>※住民税は別でかかる場合があります。</p>
-  <p>※報酬から税金が引かれていない場合は、結果が変わります。</p></div>`;
-const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a><div class="cta-sub">スマホで数分。むずかしいことはタックスナップがやります。</div>`;
+  <p>※この診断は所得税を対象としています。住民税は別途課税される場合があります。</p>${genzei ? `
+  <p class="warn">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</p>` : ``}</div>`;
+const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a>`;
+const POINTS = label => `<div class="points-toggle" id="pointsToggle" onclick="togglePoints()">
+    <div class="pt-lead">タックスナップなら</div>
+    <div class="pt-title"><span class="pt-deco">＼</span>スマホでカンタンに確定申告ができます<span class="pt-deco">／</span></div>
+    <span class="pt-chev">⌄</span>
+  </div>
+  <div class="points-body hidden" id="pointsBox"><img src="taxnap-points.png" alt="タックスナップなら、スマホでカンタンに確定申告ができます">${CTA(label)}</div>`;
 
 function buildResultHTML(r){
   if(r.type==='①'){
     return `<div class="result-headline"><div class="lead">あなたに</div>
-      <div class="amount">${yen(r.amount)}</div><div class="amount-note">戻ってくる可能性があります</div></div>
-      ${NOTES}
-      <div class="result-card"><p>もしかしたら税金を払いすぎているかもしれません。<br>確定申告をすれば、その分を取り戻せる可能性があります。</p></div>
-      <div class="result-card"><p><b>実はこれ、今年分“だけ”の金額です。</b><br>確定申告は<b>過去5年分まで</b>さかのぼれる——<br>つまり、<b>まだ眠っているお金が、もっとあるかも。</b></p></div>
-      ${CTA('タックスナップでお金を取り戻す →')}`;
+      <div class="amount">${yen(r.amount)}</div><div class="amount-note"><span class="an-pop">戻ってくる可能性</span><span class="an-dim">があります</span></div></div>
+      ${NOTES()}
+      <div class="result-card cta-card">
+        <div class="cta-card-top">
+          <div class="grow-icon"><img src="calendar.png" alt=""></div>
+          <div class="grow-text"><div class="cta-lead">もしかしたら、<br>税金を払いすぎているかもしれません</div><div class="cta-head"><span class="hl">確定申告</span>をすると、<br>お金を取り戻せます</div></div>
+        </div>
+        ${CTA('アプリでお金を取り戻す →')}
+      </div>
+      ${POINTS('アプリでお金を取り戻す →')}
+      <div class="result-card grow-card">
+        <div class="grow-icon"><img src="piggy.png" alt=""></div>
+        <div class="grow-text">
+          <div class="grow-head">まだ増えるかもしれません</div>
+          <p>実はこれ、<b>今年分“だけ”</b>の金額です。<br>確定申告は<b>過去5年分まで</b>さかのぼれるため、<br>取り戻せるお金がもっとある可能性も。</p>
+        </div>
+      </div>
+      <div class="caution">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</div>`;
   }
   if(r.type==='③'){
     return `<div class="result-headline"><div class="lead">あなたは</div>
-      <div class="amount">${yen(r.amount)}</div><div class="amount-note">取り戻せる可能性があります</div></div>
-      ${NOTES}
-      ${ratioBar(r)}
-      <div class="result-card"><p><b>平均よりも大幅に低い人は要注意！</b><br>経費にできる項目が、もっとあるかも。</p></div>
-      ${CTA('タックスナップでお金を取り戻す →')}`;
+      <div class="amount">${yen(r.amount)}</div><div class="amount-note">損している可能性があります</div></div>
+      ${NOTES(false)}
+      ${ratioBar(r, '<div class="bar-note"><b>平均よりも大幅に低い人は要注意！</b><br><b class="wavy">経費にできる項目が、もっとあるかも</b>。</div>')}
+      ${CTA('アプリで損を防ぐ →')}
+      ${POINTS('アプリで損を防ぐ →')}`;
   }
   if(r.type==='②'){
     return `<div class="result-headline"><div class="lead">戻ってくるお金は</div>
       <div class="amount zero">¥0</div></div>
-      ${NOTES}
-      <div class="result-card"><p>あなたの場合、<b>税金を追加で納める可能性</b>があります。<br>放置しておくと、<b>あとから負担が増える</b>ことも。</p>
+      ${NOTES()}
+      <div class="result-card"><p>確定申告をしていない場合、<br><span class="em">追加の税金が発生する</span>可能性があります。<br><br>放置しておくと、あとから<span class="em">負担が増える</span>ことも。</p>
       <div class="reassure">今動き出せば、ダメージを最小限にできます。</div></div>
-      ${CTA('タックスナップに確定申告を丸投げする →')}`;
+      ${CTA('アプリに確定申告を丸投げする →')}
+      ${POINTS('アプリに確定申告を丸投げする →')}`;
   }
   if(r.type==='④'){
     return `<div class="result-headline"><div class="lead">戻ってくるお金は、</div>
       <div class="amount zero">¥0</div></div>
-      ${NOTES}
-      ${ratioBar(r)}
-      <div class="result-card"><p><b>経費の割合が、大幅に高い人は要注意！</b><br>税務調査で確認されることもあるので、リスクをチェックしておくと安心です。</p></div>
-      ${CTA('税務調査リスクをチェックする →')}`;
+      ${NOTES(false)}
+      ${ratioBar(r, '<div class="bar-note"><b>経費の割合が、大幅に高い人は要注意！</b><br><b class="wavy">税務調査で確認されることもあるので、リスクをチェックしておくと安心です</b>。</div>')}
+      ${CTA('税務調査リスクをチェックする →')}
+      ${POINTS('詳しくはこちら →')}`;
   }
   return `<div class="result-headline"><div class="lead">あなたは</div>
     <div class="amount zero">¥0</div><div class="amount-note muted">いまは申告は不要のようです</div></div>
-    ${NOTES}
+    ${NOTES(false)}
     <div class="result-card"><p>いまの収入なら、確定申告は必要なさそうです。<br>これから収入が増えたら、戻ってくるお金が出てくるかもしれません。</p></div>
     ${CTA('タックスナップで備えておく →')}`;
 }
