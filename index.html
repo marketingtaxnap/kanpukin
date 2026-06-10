@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>夜のお仕事 還付金診断｜タックスナップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#27BA74;--brand-light:#e8f8f0;--brand-dark:#1e9a5e;--bg:#f7f9fc;--card:#fff;--text:#222;--text-sub:#666;--text-light:#999;--gold:#f0c040;--error:#e74c3c;--radius:14px;--shadow:0 2px 12px rgba(0,0,0,.06)}
+html{font-size:16px}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;align-items:center;-webkit-font-smoothing:antialiased}
+.container{width:100%;max-width:480px;margin:0 auto;padding:0 16px 40px;position:relative;min-height:100dvh}
+.logo-bar{text-align:center;padding:12px 0 0;position:sticky;top:0;z-index:101;background:var(--bg)}
+.logo-bar img{height:24px}
+.progress-wrap{position:sticky;top:36px;z-index:100;background:var(--bg);padding:8px 0 4px}
+.progress-track{height:6px;border-radius:3px;background:#e0e0e0;overflow:hidden}
+.progress-fill{height:100%;background:var(--brand);border-radius:3px;width:0;transition:width .4s ease}
+.progress-wrap.hidden{display:none}
+.slide{display:none;animation:slideIn .4s ease}
+.slide.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:24px;overflow:hidden}
+.intro-hero{background:linear-gradient(180deg,#e8f8f0 0%,#f0faf5 55%,#fff 100%);padding:28px 20px 8px;text-align:center}
+.intro-hero img{width:120px;height:auto;margin:0 auto}
+.intro-body{padding:4px 22px 26px}
+.intro-title{font-size:22px;font-weight:800;line-height:1.5;margin-bottom:10px}
+.intro-title .hl{color:var(--brand)}
+.intro-sub{font-size:13px;color:var(--text-sub);line-height:1.8;margin-bottom:18px}
+.intro-points{list-style:none;margin-bottom:22px}
+.intro-points li{font-size:13px;font-weight:500;padding:8px 0 8px 28px;position:relative;border-bottom:1px dashed #eee}
+.intro-points li:last-child{border-bottom:none}
+.intro-points li::before{content:'✓';position:absolute;left:4px;top:8px;color:var(--brand);font-weight:800}
+.q-card{background:var(--card);border-radius:var(--radius);padding:24px 20px;box-shadow:var(--shadow);margin-top:16px}
+.q-number{font-size:12px;color:var(--brand);font-weight:700;margin-bottom:6px}
+.q-text{font-size:17px;font-weight:700;line-height:1.6;margin-bottom:18px;white-space:pre-line}
+.q-hint{font-size:12px;color:var(--text-light);margin:-8px 0 14px;line-height:1.6}
+.sa-option{display:flex;align-items:center;padding:14px 16px;border:2px solid #e8e8e8;border-radius:12px;margin-bottom:10px;cursor:pointer;transition:all .2s;font-size:15px;line-height:1.5;user-select:none}
+.sa-option:hover{border-color:var(--brand-light);background:var(--brand-light)}
+.sa-option.selected{border-color:var(--brand);background:var(--brand-light);font-weight:600}
+.sa-option .radio{width:20px;height:20px;border:2px solid #ccc;border-radius:50%;margin-right:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.sa-option.selected .radio{border-color:var(--brand);background:var(--brand)}
+.sa-option.selected .radio::after{content:'';width:8px;height:8px;background:#fff;border-radius:50%}
+.num-wrap{display:flex;align-items:center;gap:10px;margin-top:4px}
+.num-input{flex:1;width:100%;padding:16px;border:2px solid #e0e0e0;border-radius:12px;font-size:22px;font-weight:700;font-family:'Noto Sans JP',sans-serif;text-align:right;transition:border-color .2s}
+.num-input:focus{outline:none;border-color:var(--brand)}
+.num-input::-webkit-outer-spin-button,.num-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.num-input{-moz-appearance:textfield;appearance:textfield}
+.num-input::placeholder{color:#d3d8de;font-weight:400}
+.num-unit{font-size:16px;font-weight:700;color:var(--text-sub)}
+.sub-field{margin-top:18px;padding-top:18px;border-top:1px dashed #eee}
+.sub-field.hidden{display:none}
+.sub-field .q-text{font-size:15px;margin-bottom:12px}
+.exp-box{background:var(--brand-light);border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.exp-box .exp-row{font-size:12.5px;line-height:1.7;color:var(--text-sub);padding:3px 0}
+.exp-box .exp-row b{color:var(--brand-dark);font-weight:700}
+.exp-box .exp-title{font-size:13px;font-weight:700;color:var(--brand-dark);text-align:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid rgba(39,186,116,.25)}
+.btn-next{display:block;width:100%;padding:16px;background:var(--brand);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s;margin-top:18px}
+.btn-next:hover{background:var(--brand-dark)}
+.btn-next:disabled{background:#d8dde3;cursor:not-allowed}
+.btn-back{display:block;margin:8px auto 0;background:none;border:none;color:var(--text-light);font-size:13px;font-family:inherit;cursor:pointer}
+.result-headline{text-align:center;padding:28px 16px 8px}
+.result-headline .lead{font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px}
+.result-headline .amount{font-size:46px;font-weight:800;color:var(--brand);line-height:1.1;margin:6px 0}
+.result-headline .amount.zero{color:var(--text-light)}
+.result-headline .amount-note{font-size:14px;font-weight:700;color:var(--brand)}
+.result-headline .amount-note.muted{color:var(--text-sub)}
+.result-card{background:var(--card);border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);margin-top:16px}
+.result-card .rc-title{font-size:15px;font-weight:700;margin-bottom:14px;text-align:center}
+.result-card p{font-size:13.5px;line-height:1.8;color:var(--text-sub)}
+.result-card .reassure{background:var(--brand-light);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.7;color:var(--brand-dark);font-weight:500;margin-top:14px}
+.bar-block{margin:6px 0 4px}
+.bar-label{font-size:12px;color:var(--text-sub);margin:10px 0 4px;font-weight:700}
+.bar-track{height:30px;border-radius:8px;background:#eee;overflow:hidden;position:relative}
+.bar-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;color:#fff;font-size:13px;font-weight:700;border-radius:8px}
+.bar-fill.you{background:var(--brand)}
+.bar-fill.avg{background:#888}
+.bar-cap{font-size:11px;color:var(--text-light);margin-top:6px}
+.cta-btn{display:block;width:100%;padding:18px;background:var(--brand);color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:800;text-align:center;text-decoration:none;margin-top:20px;box-shadow:0 4px 16px rgba(39,186,116,.3);transition:transform .15s}
+.cta-btn:hover{transform:translateY(-2px)}
+.cta-sub{text-align:center;font-size:12px;color:var(--text-light);margin-top:10px}
+.notes{margin-top:12px;font-size:11px;color:var(--text-light);line-height:1.7;background:#f0f2f5;border-radius:10px;padding:12px 14px}
+.notes p{margin-bottom:4px}
+.notes p:last-child{margin-bottom:0}
+.notes-bar{text-align:center;margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;width:100%}
+.help-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#cfd6dd;color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
+.help-label{font-size:12px;color:var(--text-light)}
+.notes-bar:hover .help-icon{background:var(--text-light)}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo-bar"><img src="taxnap_logo.png" alt="タックスナップ"></div>
+  <div class="progress-wrap hidden" id="progressWrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+
+  <div class="slide-area" id="slideArea">
+
+    <!-- INTRO (0) -->
+    <section class="slide active" data-slide="intro">
+      <div class="intro-card">
+        <div class="intro-hero"><img src="snappy-hero.png" alt=""></div>
+        <div class="intro-body">
+          <div class="intro-title">あなたに<span class="hl">戻ってくるお金</span>、いくら？</div>
+          <div class="intro-sub">夜のお仕事をしている人の多くが、受け取れるお金を見逃しています。<br>1分で、あなたの“戻ってくる金額”がわかります。</div>
+          <ul class="intro-points">
+            <li>名前も連絡先もいらない</li>
+            <li>お店にも会社にもバレない</li>
+            <li>スマホでタップするだけ</li>
+          </ul>
+          <button class="btn-next" onclick="next()">戻ってくるお金を調べる →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q1 職種 (1) -->
+    <section class="slide" data-slide="q1">
+      <div class="q-card">
+        <div class="q-number">Q1 / 6</div>
+        <div class="q-text">あなたのお仕事を選んでください</div>
+        <div data-sa="job">
+          <div class="sa-option" data-val="cabakura"><span class="radio"></span>キャバクラ</div>
+          <div class="sa-option" data-val="club"><span class="radio"></span>クラブ・ラウンジ</div>
+          <div class="sa-option" data-val="girlsbar"><span class="radio"></span>ガールズバー・スナック</div>
+          <div class="sa-option" data-val="host"><span class="radio"></span>ホスト</div>
+          <div class="sa-option" data-val="fuzoku"><span class="radio"></span>風俗・メンエス</div>
+          <div class="sa-option" data-val="other"><span class="radio"></span>その他</div>
+        </div>
+        <button class="btn-next" disabled onclick="next()">次へ →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- Q2 確定申告 (2) -->
+    <section class="slide" data-slide="q2">
+      <div class="q-card">
+        <div class="q-number">Q2 / 6</div>
+        <div class="q-text">確定申告はしていますか？</div>
+        <div data-sa="filed">
+          <div class="sa-option" data-val="yes"><span class="radio"></span>している</div>
+          <div class="sa-option" data-val="no"><span class="radio"></span>していない</div>
+        </div>
+        <div class="sub-field hidden" id="q2sub">
+          <div class="q-text">青色申告ですか？白色申告ですか？</div>
+          <div data-sa="blueFiling">
+            <div class="sa-option" data-val="blue"><span class="radio"></span>青色申告</div>
+            <div class="sa-option" data-val="white"><span class="radio"></span>白色申告</div>
+            <div class="sa-option" data-val="unknown"><span class="radio"></span>わからない</div>
+          </div>
+        </div>
+        <button class="btn-next" disabled onclick="next()">次へ →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- Q3 昼の給料 (3) -->
+    <section class="slide" data-slide="q3">
+      <div class="q-card">
+        <div class="q-number">Q6 / 6</div>
+        <div class="q-text">昼のお仕事（会社員など）もしていますか？</div>
+        <div data-sa="hasDayJob">
+          <div class="sa-option" data-val="yes"><span class="radio"></span>はい</div>
+          <div class="sa-option" data-val="no"><span class="radio"></span>いいえ</div>
+        </div>
+        <div class="sub-field hidden" id="q3sub">
+          <div class="q-text">昼のお仕事の年収はいくらですか？</div>
+          <div class="num-wrap"><input class="num-input" id="dayIncome" type="number" inputmode="numeric" min="0" placeholder="例：300" oninput="this.value=this.value.replace('-','')"><span class="num-unit">万円</span></div>
+        </div>
+        <button class="btn-next" disabled onclick="submitQ3()">結果を見る →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- Q4 収入 (4) -->
+    <section class="slide" data-slide="q4">
+      <div class="q-card">
+        <div class="q-number">Q3 / 6</div>
+        <div class="q-text">1年間の収入はいくらですか？</div>
+        <div class="num-wrap"><input class="num-input" id="yearReward" type="number" inputmode="numeric" min="0" placeholder="例：300" oninput="this.value=this.value.replace('-','')"><span class="num-unit">万円</span></div>
+        <button class="btn-next" onclick="submitNum('yearReward',true)">次へ →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- Q5 経費 (5) -->
+    <section class="slide" data-slide="q5">
+      <div class="q-card">
+        <div class="q-number">Q4 / 6</div>
+        <div class="q-text">お仕事のために使っているお金（経費）は、1年間でいくらですか？</div>
+        <div class="exp-box">
+          <div class="exp-title">夜のお仕事をしている方は、こんなものが経費になります</div>
+          <div class="exp-row"><b>衣装</b>：お店で着るドレス・スーツ・衣装</div>
+          <div class="exp-row"><b>美容</b>：ヘアセット・ヘアメイク</div>
+          <div class="exp-row"><b>撮影</b>：宣材写真・プロフィール撮影代</div>
+          <div class="exp-row"><b>移動</b>：出勤・退勤の交通費（電車・お店の送迎代）／同伴・アフター・深夜帰宅のタクシー代</div>
+          <div class="exp-row"><b>営業/交際</b>：同伴・アフターの飲食・お客さまへのプレゼント</div>
+          <div class="exp-row"><b>通信</b>：お客さま連絡・集客用のスマホ代</div>
+          <div class="exp-row"><b>その他</b>：名刺・小物などの備品</div>
+        </div>
+        <div class="num-wrap"><input class="num-input" id="yearExpense" type="number" inputmode="numeric" min="0" placeholder="例：50" oninput="this.value=this.value.replace('-','')"><span class="num-unit">万円</span></div>
+        <button class="btn-next" onclick="submitNum('yearExpense',false)">次へ →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- Q6 出勤日数 (6) -->
+    <section class="slide" data-slide="q6">
+      <div class="q-card">
+        <div class="q-number">Q5 / 6</div>
+        <div class="q-text">1週間に何日出勤していますか？</div>
+        <div data-sa="weekDays">
+          <div class="sa-option" data-val="1-2"><span class="radio"></span>週1〜2日</div>
+          <div class="sa-option" data-val="3-4"><span class="radio"></span>週3〜4日</div>
+          <div class="sa-option" data-val="5+"><span class="radio"></span>週5日以上</div>
+        </div>
+        <button class="btn-next" disabled onclick="next()">次へ →</button>
+        <button class="btn-back" onclick="back()">← 戻る</button>
+      </div>
+    </section>
+
+    <!-- RESULT (7) -->
+    <section class="slide" data-slide="result"><div id="resultArea"></div></section>
+
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="calc.js"></script>
+<script>
+/* ===== 設定：あとで差し替え ===== */
+const GAS_URL = '';                 // GASのWebアプリURL（記録先）。空なら記録しない
+const POST_TOKEN = 'CHANGE_ME';     // GAS側と合わせるトークン
+const APP_CTA_URL = '#';            // AdjustのDLリンク（CTAの飛び先）
+
+const SLIDES = ['intro','q1','q2','q4','q5','q6','q3','result'];
+const answers = {};
+let idx = 0;
+
+function go(i){
+  idx = i;
+  document.querySelectorAll('.slide').forEach(s=>s.classList.toggle('active', SLIDES[i]===s.dataset.slide));
+  const pw = document.getElementById('progressWrap');
+  if(i===0 || SLIDES[i]==='result'){ pw.classList.add('hidden'); }
+  else { pw.classList.remove('hidden'); document.getElementById('progressFill').style.width = (i/6*100)+'%'; }
+  window.scrollTo(0,0);
+  if(SLIDES[i]==='result') renderResult();
+}
+function toggleNotes(){ document.getElementById('notesBox').classList.toggle('hidden'); }
+function next(){ go(idx+1); }
+function back(){ go(idx-1); }
+
+/* SA選択：値を保存→その質問の「次へ」を有効化（自動遷移はしない） */
+document.querySelectorAll('[data-sa]').forEach(group=>{
+  const key = group.dataset.sa;
+  group.querySelectorAll('.sa-option').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      group.querySelectorAll('.sa-option').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answers[key] = opt.dataset.val;
+      const slide = group.closest('.slide');
+      const nextBtn = slide.querySelector('.btn-next');
+      if(key==='filed'){
+        const sub = document.getElementById('q2sub');
+        if(opt.dataset.val==='yes'){ sub.classList.remove('hidden'); nextBtn.disabled = !answers.blueFiling; }
+        else { sub.classList.add('hidden'); answers.blueFiling = null; nextBtn.disabled = false; }
+        return;
+      }
+      if(key==='hasDayJob'){
+        const sub = document.getElementById('q3sub');
+        sub.classList.toggle('hidden', opt.dataset.val!=='yes');
+        if(opt.dataset.val==='yes') setTimeout(()=>document.getElementById('dayIncome').focus(),50);
+        if(nextBtn) nextBtn.disabled = false;
+        return;
+      }
+      if(nextBtn) nextBtn.disabled = false;   // blueFiling 等はここで「次へ」有効化
+    });
+  });
+});
+
+function getNum(id){
+  const el = document.getElementById(id);
+  if(el.value.trim()==='') return null;     // 未入力
+  const v = Number(el.value);
+  return isNaN(v) ? null : v;
+}
+function submitQ3(){
+  if(answers.hasDayJob==='yes'){
+    const v = getNum('dayIncome');
+    if(v===null){ alert('昼のお仕事の年収を入力してください'); return; }
+    if(v<0){ alert('0以上の金額を入力してください'); return; }
+    if(!(v>0)){ alert('昼のお仕事の年収を入力してください'); return; }
+    answers.dayIncome = v;
+  }
+  go(idx+1);
+}
+function submitNum(key,mustPositive){
+  const v = getNum(key);
+  if(v===null){ alert('金額を入力してください'); return; }
+  if(v<0){ alert('0以上の金額を入力してください'); return; }
+  if(mustPositive && !(v>0)){ alert('金額を入力してください'); return; }
+  answers[key] = v; go(idx+1);
+}
+
+/* ===== 結果 ===== */
+function renderResult(){
+  const input = {
+    job: answers.job,
+    filed: answers.filed === 'yes',
+    blueFiling: answers.blueFiling,
+    hasDayJob: answers.hasDayJob === 'yes',
+    dayIncome: answers.dayIncome || 0,
+    yearReward: answers.yearReward || 0,
+    yearExpense: answers.yearExpense || 0,
+    weekDays: answers.weekDays,
+  };
+  const r = Kanpukin.diagnose(input);
+  document.getElementById('resultArea').innerHTML = buildResultHTML(r);
+  logResult(input, r);
+}
+
+const yen = n => '¥' + Math.round(n).toLocaleString();
+function ratioBar(r){
+  const you = Math.round((r.expenseRatio||0)*100);
+  const avg = Math.round((r.avgRatio||0.45)*100);
+  return `<div class="result-card"><div class="rc-title">経費割合（収入のうち経費の割合）</div>
+    <div class="bar-block"><div class="bar-label">あなた</div><div class="bar-track"><div class="bar-fill you" style="width:${Math.max(you,12)}%">${you}%</div></div></div>
+    <div class="bar-block"><div class="bar-label">夜のお仕事の平均</div><div class="bar-track"><div class="bar-fill avg" style="width:${Math.max(avg,12)}%">${avg}%</div></div></div>
+    <div class="bar-cap">※平均はタックスナップ利用者の平均値です</div></div>`;
+}
+const NOTES = `<div class="notes-bar" onclick="toggleNotes()"><span class="help-icon">？</span><span class="help-label">表示額について</span></div>
+  <div class="notes hidden" id="notesBox"><p>※表示額は、今年分のおおよその概算です。あくまで目安のため、実際の金額とは誤差が生じる可能性があります。</p>
+  <p>※住民税は別でかかる場合があります。</p>
+  <p>※報酬から税金が引かれていない場合は、結果が変わります。</p></div>`;
+const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a><div class="cta-sub">スマホで数分。むずかしいことはタックスナップがやります。</div>`;
+
+function buildResultHTML(r){
+  if(r.type==='①'){
+    return `<div class="result-headline"><div class="lead">あなたに</div>
+      <div class="amount">${yen(r.amount)}</div><div class="amount-note">戻ってくる可能性があります</div></div>
+      ${NOTES}
+      <div class="result-card"><p>もしかしたら税金を払いすぎているかもしれません。<br>確定申告をすれば、その分を取り戻せる可能性があります。</p></div>
+      <div class="result-card"><p><b>実はこれ、今年分“だけ”の金額です。</b><br>確定申告は<b>過去5年分まで</b>さかのぼれる——<br>つまり、<b>まだ眠っているお金が、もっとあるかも。</b></p></div>
+      ${CTA('タックスナップでお金を取り戻す →')}`;
+  }
+  if(r.type==='③'){
+    return `<div class="result-headline"><div class="lead">あなたは</div>
+      <div class="amount">${yen(r.amount)}</div><div class="amount-note">取り戻せる可能性があります</div></div>
+      ${NOTES}
+      ${ratioBar(r)}
+      <div class="result-card"><p><b>平均よりも大幅に低い人は要注意！</b><br>経費にできる項目が、もっとあるかも。</p></div>
+      ${CTA('タックスナップでお金を取り戻す →')}`;
+  }
+  if(r.type==='②'){
+    return `<div class="result-headline"><div class="lead">戻ってくるお金は</div>
+      <div class="amount zero">¥0</div></div>
+      ${NOTES}
+      <div class="result-card"><p>あなたの場合、<b>税金を追加で納める可能性</b>があります。<br>放置しておくと、<b>あとから負担が増える</b>ことも。</p>
+      <div class="reassure">今動き出せば、ダメージを最小限にできます。</div></div>
+      ${CTA('タックスナップに確定申告を丸投げする →')}`;
+  }
+  if(r.type==='④'){
+    return `<div class="result-headline"><div class="lead">戻ってくるお金は、</div>
+      <div class="amount zero">¥0</div></div>
+      ${NOTES}
+      ${ratioBar(r)}
+      <div class="result-card"><p><b>経費の割合が、大幅に高い人は要注意！</b><br>税務調査で確認されることもあるので、リスクをチェックしておくと安心です。</p></div>
+      ${CTA('税務調査リスクをチェックする →')}`;
+  }
+  return `<div class="result-headline"><div class="lead">あなたは</div>
+    <div class="amount zero">¥0</div><div class="amount-note muted">いまは申告は不要のようです</div></div>
+    ${NOTES}
+    <div class="result-card"><p>いまの収入なら、確定申告は必要なさそうです。<br>これから収入が増えたら、戻ってくるお金が出てくるかもしれません。</p></div>
+    ${CTA('タックスナップで備えておく →')}`;
+}
+
+function logResult(input, r){
+  if(!GAS_URL) return;
+  const payload = { token: POST_TOKEN, ...input, type: r.type, amount: r.amount, yearlyAmount: r.yearlyAmount, ratio: r.expenseRatio };
+  fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body: JSON.stringify(payload) }).catch(()=>{});
+}
+</script>
+</body>
+</html>
