@@ -129,6 +129,12 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .info-body.hidden{display:none}
 .info-body p{margin-bottom:5px}
 .info-body p:last-child{margin-bottom:0}
+.fv-wrap{line-height:0}
+.fv-img{width:100%;height:auto;display:block;border-radius:14px}
+.fv-cta{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:19px;margin-top:16px;background:var(--brand);color:#fff;border:none;border-radius:16px;font-family:inherit;font-size:18px;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(39,186,116,.35);transition:transform .15s}
+.fv-cta:active{transform:translateY(1px)}
+.fv-arrow{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.fv-note{text-align:center;font-size:11.5px;color:var(--text-light);line-height:1.7;margin-top:14px;padding:0 10px}
 .hidden{display:none!important}
 </style>
 </head>
@@ -141,19 +147,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 
     <!-- INTRO (0) -->
     <section class="slide active" data-slide="intro">
-      <div class="intro-card">
-        <div class="intro-hero"><img src="snappy-hero.png" alt=""></div>
-        <div class="intro-body">
-          <div class="intro-title">あなたに<span class="hl">戻ってくるお金</span>、いくら？</div>
-          <div class="intro-sub">夜のお仕事をしている人の多くが、受け取れるお金を見逃しています。<br>1分で、あなたの“戻ってくる金額”がわかります。</div>
-          <ul class="intro-points">
-            <li>名前も連絡先もいらない</li>
-            <li>お店にも会社にもバレない</li>
-            <li>スマホでタップするだけ</li>
-          </ul>
-          <button class="btn-next" onclick="next()">戻ってくるお金を調べる →</button>
-        </div>
+      <div class="fv-wrap">
+        <img class="fv-img" src="firstview.png" alt="あなたに戻ってくるお金、いくら？ 税理士監修・夜のお仕事の還付金診断">
       </div>
+      <button class="fv-cta" onclick="next()">診断を始める<span class="fv-arrow">→</span></button>
     </section>
 
     <!-- Q1 職種 (1) -->
