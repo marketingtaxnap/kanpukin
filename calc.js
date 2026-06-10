@@ -94,8 +94,13 @@
     /* STEP1：源泉徴収額（接待系のみ） */
     let genzei = 0;
     if (C.genzeiByJob[a.job]) {
-      const workDays = (C.monthlyWorkDays[a.weekDays] || 0) * 12;
-      genzei = Math.max(0, yenReward - C.dailyDeduction * workDays) * C.genzeiRate;
+      // 源泉の5,000円控除に使う「日数」。国税庁の定義は計算期間の暦日数。
+      //   日払い   → 1回＝1日なので 出勤日数(年) を使う
+      //   まとめ払い → 週・月単位なので 暦日数(年≒365) を使う
+      const days = (a.payType === 'lump')
+        ? C.yearCalendarDays
+        : (C.monthlyWorkDays[a.weekDays] || 0) * 12;
+      genzei = Math.max(0, yenReward - C.dailyDeduction * days) * C.genzeiRate;
     }
 
     /* 申告済み → ③ / ④（経費割合で判定） */

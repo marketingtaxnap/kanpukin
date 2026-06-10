@@ -246,15 +246,22 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       </div>
     </section>
 
-    <!-- Q6 出勤日数 (6) -->
+    <!-- Q6 払い方（日払い→出勤日数を聞く） (6) -->
     <section class="slide" data-slide="q6">
       <div class="q-card">
         <div class="q-number">Q5 / 6</div>
-        <div class="q-text">1週間に何日出勤していますか？</div>
-        <div data-sa="weekDays">
-          <div class="sa-option" data-val="1-2"><span class="radio"></span>週1〜2日</div>
-          <div class="sa-option" data-val="3-4"><span class="radio"></span>週3〜4日</div>
-          <div class="sa-option" data-val="5+"><span class="radio"></span>週5日以上</div>
+        <div class="q-text">お店からの収入は、日払いですか？</div>
+        <div data-sa="payType">
+          <div class="sa-option" data-val="daily"><span class="radio"></span>はい</div>
+          <div class="sa-option" data-val="lump"><span class="radio"></span>いいえ</div>
+        </div>
+        <div class="sub-field hidden" id="q6sub">
+          <div class="q-text">1週間に何日出勤していますか？</div>
+          <div data-sa="weekDays">
+            <div class="sa-option" data-val="1-2"><span class="radio"></span>週1〜2日</div>
+            <div class="sa-option" data-val="3-4"><span class="radio"></span>週3〜4日</div>
+            <div class="sa-option" data-val="5+"><span class="radio"></span>週5日以上</div>
+          </div>
         </div>
         <button class="btn-next" disabled onclick="next()">次へ →</button>
         <button class="btn-back" onclick="back()">← 戻る</button>
@@ -309,6 +316,12 @@ document.querySelectorAll('[data-sa]').forEach(group=>{
         else { sub.classList.add('hidden'); answers.blueFiling = null; nextBtn.disabled = false; }
         return;
       }
+      if(key==='payType'){
+        const sub = document.getElementById('q6sub');
+        if(opt.dataset.val==='daily'){ sub.classList.remove('hidden'); nextBtn.disabled = !answers.weekDays; }
+        else { sub.classList.add('hidden'); answers.weekDays = null; sub.querySelectorAll('.sa-option').forEach(o=>o.classList.remove('selected')); nextBtn.disabled = false; }
+        return;
+      }
       if(key==='hasDayJob'){
         const sub = document.getElementById('q3sub');
         sub.classList.toggle('hidden', opt.dataset.val!=='yes');
@@ -356,6 +369,7 @@ function renderResult(){
     yearReward: answers.yearReward || 0,
     yearExpense: answers.yearExpense || 0,
     weekDays: answers.weekDays,
+    payType: answers.payType,
   };
   const r = Kanpukin.diagnose(input);
   document.getElementById('resultArea').innerHTML = buildResultHTML(r);
