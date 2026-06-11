@@ -111,6 +111,20 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .wavy{text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--brand);text-decoration-thickness:1.5px;text-underline-offset:4px}
 .cta-btn{display:block;width:100%;padding:18px;background:var(--brand);color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:800;text-align:center;text-decoration:none;margin-top:20px;box-shadow:0 4px 16px rgba(39,186,116,.3);transition:transform .15s}
 .cta-btn:hover{transform:translateY(-2px)}
+.why-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;padding:8px 2px;margin-top:16px;cursor:pointer;font-family:inherit;text-align:left}
+.why-btn .why-q{flex-shrink:0;width:19px;height:19px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.why-btn .why-label{font-size:12px;font-weight:700;color:var(--brand-dark)}
+.why-btn:hover .why-label{opacity:.7}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px}
+.modal-overlay.hidden{display:none}
+.modal-box{background:#fff;border-radius:16px;padding:26px 20px 22px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;position:relative;text-align:left;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+.modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.92);border:1px solid #eee;border-radius:50%;width:34px;height:34px;font-size:21px;color:#666;cursor:pointer;line-height:1;padding:0;z-index:210;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.modal-box.modal-img{padding:0;background:none;box-shadow:none}
+.modal-img img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.2)}
+.modal-title{font-size:18px;font-weight:800;margin-bottom:16px;color:var(--text)}
+.modal-box p{font-size:13.5px;line-height:1.9;color:var(--text-sub);margin-bottom:13px}
+.modal-box p:last-child{margin-bottom:0}
+.modal-box b{color:var(--brand-dark);font-weight:700}
 .cta-sub{text-align:center;font-size:12px;color:var(--text-light);margin-top:10px}
 .notes{margin-top:12px;font-size:11px;color:var(--text-light);line-height:1.7;background:#f0f2f5;border-radius:10px;padding:12px 14px}
 .notes p{margin-bottom:4px}
@@ -295,6 +309,8 @@ function go(i){
   if(SLIDES[i]==='result') renderResult();
 }
 function toggleNotes(){ document.getElementById('notesBox').classList.toggle('hidden'); }
+function openWhy(){ document.getElementById('whyModal').classList.remove('hidden'); document.body.style.overflow='hidden'; }
+function closeWhy(){ document.getElementById('whyModal').classList.add('hidden'); document.body.style.overflow=''; }
 function togglePoints(){ document.getElementById('pointsBox').classList.toggle('hidden'); document.getElementById('pointsToggle').classList.toggle('open'); }
 function next(){ go(idx+1); }
 function back(){ go(idx-1); }
@@ -407,6 +423,7 @@ function buildResultHTML(r){
           <div class="grow-text"><div class="cta-lead">もしかしたら、<br>税金を払いすぎているかもしれません</div><div class="cta-head"><span class="hl">確定申告</span>をすることで、<br>お金を取り戻せる可能性があります</div></div>
         </div>
         ${CTA('アプリでお金を取り戻す →')}
+        <button class="why-btn" onclick="openWhy()"><span class="why-q">?</span><span class="why-label">なんでお金が戻ってくるの？</span></button>
       </div>
       ${POINTS('アプリでお金を取り戻す →')}
       <div class="result-card grow-card">
@@ -417,7 +434,13 @@ function buildResultHTML(r){
           <p>タックスナップなら<br><b>過去3年分まで</b>さかのぼって申告できるため、<br>取り戻せるお金がもっと増えるかも。</p>
         </div>
       </div>
-      <div class="caution">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</div>`;
+      <div class="caution">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</div>
+      <div class="modal-overlay hidden" id="whyModal" onclick="if(event.target===this)closeWhy()">
+        <button class="modal-close" onclick="closeWhy()" aria-label="閉じる">×</button>
+        <div class="modal-box modal-img">
+          <img src="why-refund.png" alt="なんでお金が戻ってくるの？ 夜職の還付金の理由をわかりやすく解説">
+        </div>
+      </div>`;
   }
   if(r.type==='③'){
     return `<div class="result-headline"><div class="lead">あなたは</div>
