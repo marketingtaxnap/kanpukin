@@ -113,7 +113,7 @@
           type: '③', label: '経費の取りこぼし（取り戻せる）',
           amount: Math.round(Math.max(0, recoverable)),
           expenseRatio, avgRatio: C.avgExpenseRatio,
-          note: '更正の請求（過去最大5年・領収書が必要）',
+          note: '更正の請求（過去最大3年・領収書が必要）',
         };
       }
       return {
@@ -129,7 +129,7 @@
 
     if (refund > 0) {
       return { type: '①', label: '払いすぎた税金が戻る', amount: Math.round(refund),
-               expenseRatio, avgRatio: C.avgExpenseRatio, note: '還付申告（任意・最大5年・罰金なし）' };
+               expenseRatio, avgRatio: C.avgExpenseRatio, note: '還付申告（任意・最大3年・罰金なし）' };
     }
     if (yakoTax <= 0) {
       return { type: 'exempt', label: '申告不要', amount: 0,
