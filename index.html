@@ -96,6 +96,9 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .pt-deco{color:var(--brand);font-weight:800;transform:scaleY(1.4)}
 .pt-chev{display:block;color:var(--brand-dark);font-size:20px;font-weight:900;margin-top:3px;transition:transform .25s}
 .points-toggle.open .pt-chev{transform:rotate(180deg)}
+.pt-tap{display:flex;align-items:center;gap:8px;width:fit-content;margin:11px auto 0;border:2px solid var(--brand);color:var(--brand);border-radius:999px;padding:7px 20px;font-size:14px;font-weight:700;letter-spacing:.05em}
+.pt-tap .chev{width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .25s}
+.points-toggle.open .pt-tap .chev{transform:rotate(225deg);margin-top:2px}
 .points-body{margin-top:14px;margin-bottom:30px}
 .points-body.hidden{display:none}
 .points-body img{width:100%;height:auto;display:block;border-radius:12px}
@@ -405,7 +408,13 @@ const NOTES = (genzei=true) => `<div class="notes-bar" onclick="toggleNotes()"><
   <p>※この診断は所得税を対象としています。住民税は別途課税される場合があります。</p>${genzei ? `
   <p class="warn">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</p>` : ``}</div>`;
 const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a>`;
-const POINTS = label => `<div class="result-card" style="text-align:center">
+const POINTS = label => `<div class="points-toggle" id="pointsToggle" onclick="togglePoints()">
+    <div class="pt-lead">タックスナップなら</div>
+    <div class="pt-title"><span class="pt-deco">＼</span>スマホでカンタンに確定申告ができます<span class="pt-deco">／</span></div>
+    <div class="pt-tap"><span class="chev"></span>TAP</div>
+  </div>
+  <div class="points-body hidden" id="pointsBox"><img src="taxnap-points.png" alt="タックスナップなら、スマホでカンタンに確定申告ができます">${CTA(label)}</div>`;
+const POINTS_CARD = label => `<div class="result-card" style="text-align:center">
     <div class="pt-lead">タックスナップなら</div>
     <div class="pt-title"><span class="pt-deco">＼</span>スマホでカンタンに確定申告ができます<span class="pt-deco">／</span></div>
     <img src="taxnap-points.png" alt="タックスナップなら、スマホでカンタンに確定申告ができます" style="width:100%;height:auto;display:block;border-radius:12px;margin-top:14px">
@@ -472,7 +481,7 @@ function buildResultHTML(r){
           </div>
         </div>
         ${CTA('税務調査リスクをチェックする →')}`)}
-      ${POINTS('確定申告を楽にする →')}`;
+      ${POINTS_CARD('確定申告を楽にする →')}`;
   }
   return `<div class="result-headline"><div class="lead">あなたは</div>
     <div class="amount zero">¥0</div><div class="amount-note muted">いまは申告は不要のようです</div></div>
