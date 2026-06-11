@@ -194,7 +194,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
     <section class="slide" data-slide="q2">
       <div class="q-card">
         <div class="q-number">Q2 / 6</div>
-        <div class="q-text">確定申告はしていますか？</div>
+        <div class="q-text">令和7年分（2025年）の確定申告はしましたか？</div>
         <div data-sa="filed">
           <div class="sa-option" data-val="yes"><span class="radio"></span>している</div>
           <div class="sa-option" data-val="no"><span class="radio"></span>していない</div>
@@ -404,7 +404,7 @@ function ratioBar(r, footer=''){
     <div class="bar-cap">※平均はタックスナップ利用者の平均値です</div>${footer}</div>`;
 }
 const NOTES = (genzei=true) => `<div class="notes-bar" onclick="toggleNotes()"><span class="help-icon">？</span><span class="help-label">表示額について</span></div>
-  <div class="notes hidden" id="notesBox"><p>※表示額は、今年分のおおよその概算です。あくまで目安のため、実際の金額とは誤差が生じる可能性があります。</p>
+  <div class="notes hidden" id="notesBox"><p>※表示額は、令和7年分のおおよその概算です。あくまで目安のため、実際の金額とは誤差が生じる可能性があります。</p>
   <p>※この診断は所得税を対象としています。住民税は別途課税される場合があります。</p>${genzei ? `
   <p class="warn">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</p>` : ``}</div>`;
 const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a>`;
@@ -439,7 +439,7 @@ function buildResultHTML(r){
         <div class="grow-icon"><img src="piggy.png" alt=""></div>
         <div class="grow-text">
           <div class="grow-head">確定申告アプリ「タックスナップ」なら<br>これよりもっと取り戻せる</div>
-          <p>実はこれ、<b>今年分“だけ”</b>の金額です。</p>
+          <p>実はこれ、<b>令和7年分“だけ”</b>の金額です。</p>
           <p>タックスナップなら<br><b>過去3年分まで</b>さかのぼって申告できるため、<br>取り戻せるお金がもっと増えるかも。</p>
         </div>
       </div>
