@@ -405,12 +405,12 @@ const NOTES = (genzei=true) => `<div class="notes-bar" onclick="toggleNotes()"><
   <p>※この診断は所得税を対象としています。住民税は別途課税される場合があります。</p>${genzei ? `
   <p class="warn">※お店が報酬から税金（源泉徴収）を引いていない場合は、結果が変わります。明細や支払調書で必ずご確認ください。</p>` : ``}</div>`;
 const CTA = label => `<a class="cta-btn" href="${APP_CTA_URL}">${label}</a>`;
-const POINTS = label => `<div class="points-toggle" id="pointsToggle" onclick="togglePoints()">
+const POINTS = label => `<div class="result-card" style="text-align:center">
     <div class="pt-lead">タックスナップなら</div>
     <div class="pt-title"><span class="pt-deco">＼</span>スマホでカンタンに確定申告ができます<span class="pt-deco">／</span></div>
-    <span class="pt-chev">⌄</span>
-  </div>
-  <div class="points-body hidden" id="pointsBox"><img src="taxnap-points.png" alt="タックスナップなら、スマホでカンタンに確定申告ができます">${CTA(label)}</div>`;
+    <img src="taxnap-points.png" alt="タックスナップなら、スマホでカンタンに確定申告ができます" style="width:100%;height:auto;display:block;border-radius:12px;margin-top:14px">
+    ${CTA(label)}
+  </div>`;
 
 function buildResultHTML(r){
   if(r.type==='①'){
@@ -460,12 +460,19 @@ function buildResultHTML(r){
       ${POINTS('アプリに確定申告を丸投げする →')}`;
   }
   if(r.type==='④'){
-    return `<div class="result-headline"><div class="lead">戻ってくるお金は、</div>
-      <div class="amount zero">¥0</div></div>
-      ${NOTES(false)}
-      ${ratioBar(r, '<div class="bar-note"><b>経費の割合が、大幅に高い人は要注意！</b><br><b class="wavy">税務調査で確認されることもあるので、リスクをチェックしておくと安心です</b>。</div>')}
-      ${CTA('税務調査リスクをチェックする →')}
-      ${POINTS('詳しくはこちら →')}`;
+    return `<div class="result-headline"><div class="lead" style="font-size:12px;font-weight:500;color:var(--text-light);margin-bottom:5px">確定申告に向き合えているあなたへ</div>
+      <div style="font-size:22px;line-height:1.6"><span style="font-weight:800;color:#444;letter-spacing:.06em;background:linear-gradient(transparent 60%, rgba(39,186,116,.33) 60%);padding:0 .18em;border-radius:2px">タックスナップからのアドバイス</span></div></div>
+      ${ratioBar(r, `<div class="bar-note"><b>経費の割合が、大幅に高い人は要注意！</b><br><b class="wavy">税務調査で確認されることもあるので、リスクをチェックしておくと安心です</b>。</div>
+        <div style="display:flex;gap:13px;align-items:center;margin-top:16px;padding:13px;background:#fafbfc;border:1px solid #ececec;border-radius:12px;text-align:center">
+          <div style="width:45%;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="risk-summary.png" alt="税務調査リスクのサマリー例" style="width:100%;display:block"></div>
+          <div style="flex:1">
+            <img src="taxnap_logo.png" alt="タックスナップ" style="height:14px;display:block;margin:0 auto 6px">
+            <div style="font-size:16px;font-weight:800;color:var(--brand);line-height:1.35;margin-bottom:7px">税理士監修<br>リスクチェック機能</div>
+            <p style="font-size:11.5px;line-height:1.65;color:var(--text-sub);margin:0">「経費が多すぎないか」などのリスクをチェック。事前に修正し、安心して提出できます。</p>
+          </div>
+        </div>
+        ${CTA('税務調査リスクをチェックする →')}`)}
+      ${POINTS('確定申告を楽にする →')}`;
   }
   return `<div class="result-headline"><div class="lead">あなたは</div>
     <div class="amount zero">¥0</div><div class="amount-note muted">いまは申告は不要のようです</div></div>
