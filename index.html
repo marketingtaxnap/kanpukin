@@ -154,6 +154,18 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .fv-cta:active{transform:translateY(1px)}
 .fv-arrow{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .fv-note{text-align:center;font-size:11.5px;color:var(--text-light);line-height:1.7;margin-top:14px;padding:0 10px}
+.warn-card .wh{display:flex;gap:13px;align-items:center;margin-bottom:16px}
+.warn-card .wh img{width:60px;height:auto;flex-shrink:0}
+.warn-card .wh .wt{font-size:19px;font-weight:800;line-height:1.5;color:#2a2a2a;text-align:left}
+.warn-card .wh .wt .hot{color:#e6342a;background:linear-gradient(transparent 58%,#ffe14d 58%);padding:0 1px}
+.hosoku{border:1px solid #e4e4e4;border-radius:12px;padding:15px 15px 13px;margin-bottom:13px}
+.hosoku .row{display:flex;gap:9px;font-size:13px;line-height:1.7;color:var(--text-sub);text-align:left}
+.hosoku .row .ck{flex-shrink:0;width:10px;height:10px;border-radius:50%;background:#c2c7ce;margin-top:6px}
+.hosoku .row b{color:var(--brand-dark);font-weight:700}
+.hosoku .dv{border-top:1px dashed #d9d9d9;margin:11px 0}
+.minbox{display:flex;gap:9px;align-items:center;background:#eaf7ef;border-radius:12px;padding:12px 14px;text-align:left}
+.minbox .ic{flex-shrink:0;font-size:17px;line-height:1}
+.minbox .mt{font-size:13px;font-weight:700;color:var(--brand-dark);line-height:1.6}
 .hidden{display:none!important}
 </style>
 </head>
@@ -223,6 +235,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
         </div>
         <div class="sub-field hidden" id="q3sub">
           <div class="q-text">昼のお仕事の年収はいくらですか？</div>
+          <div class="q-hint">※手取り（実際に会社から振り込まれる金額）ではなく、額面（会社から税金や社会保険料が引かれる前の金額）をお答えください。</div>
           <div class="num-wrap"><input class="num-input" id="dayIncome" type="number" inputmode="numeric" min="0" placeholder="例：300" oninput="this.value=this.value.replace('-','')"><span class="num-unit">万円</span></div>
         </div>
         <button class="btn-next" disabled onclick="submitQ3()">結果を見る →</button>
@@ -460,12 +473,19 @@ function buildResultHTML(r){
       ${POINTS('アプリで損を防ぐ →')}`;
   }
   if(r.type==='②'){
-    return `<div class="result-headline"><div class="lead">戻ってくるお金は</div>
+    return `<div class="result-headline"><div class="lead">戻ってくるお金は、</div>
       <div class="amount zero">¥0</div></div>
       ${NOTES()}
-      <div class="result-card"><p>確定申告をしていない場合、<br><span class="em">追加の税金が発生する</span>可能性があります。<br><br>放置しておくと、あとから<span class="em">負担が増える</span>ことも。</p>
-      <div class="reassure">今動き出せば、ダメージを最小限にできます。</div></div>
-      ${CTA('アプリに確定申告を丸投げする →')}
+      <div class="result-card warn-card">
+        <div class="wh"><img src="warn-icon.png" alt=""><div class="wt">このまま放置すると、<br><span class="hot">あとで追加の税金を払うことに</span><br>なる可能性があります。</div></div>
+        <div class="hosoku">
+          <div class="row"><span class="ck"></span><div>このまま確定申告をしないと、<b>税務調査</b>※に入られる可能性があります。<div style="font-size:11px;color:var(--text-light);margin-top:4px;line-height:1.6">※税金をちゃんと払っているか、税務署が直接調べに来ること</div></div></div>
+          <div class="dv"></div>
+          <div class="row"><span class="ck"></span><div>税務調査に入られると、<b>追加で税金を払うこと</b>になります。</div></div>
+        </div>
+        <div class="minbox"><span class="ic">💡</span><div class="mt">今のうちに動き出せば、<br><span class="wavy">ダメージを最小限に抑えられます</span>。</div></div>
+        ${CTA('アプリに確定申告を丸投げする →')}
+      </div>
       ${POINTS('アプリに確定申告を丸投げする →')}`;
   }
   if(r.type==='④'){
