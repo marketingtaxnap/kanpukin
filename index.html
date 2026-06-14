@@ -248,6 +248,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="q-card">
         <div class="q-number">Q3 / 6</div>
         <div class="q-text">1年間の収入はいくらですか？</div>
+        <div class="q-hint">※送迎代・ヘアメイク代・衣装レンタル代・厚生費などを、お給料から先に引かれている人は、引かれる前の金額を入力してください。</div>
         <div class="num-wrap"><input class="num-input" id="yearReward" type="number" inputmode="numeric" min="0" placeholder="例：300" oninput="this.value=this.value.replace('-','')"><span class="num-unit">万円</span></div>
         <button class="btn-next" onclick="submitNum('yearReward',true)">次へ →</button>
         <button class="btn-back" onclick="back()">← 戻る</button>
@@ -259,6 +260,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
       <div class="q-card">
         <div class="q-number">Q4 / 6</div>
         <div class="q-text">お仕事のために使っているお金（経費）は、1年間でいくらですか？</div>
+        <div class="q-hint">※送迎・ヘアメイク・衣装レンタルなどをお店がやってくれる場合、料金がお給料から先に引かれていることがあります。引かれている人は、その分も含めて入力してください。</div>
         <div class="exp-box">
           <div class="exp-title">夜のお仕事をしている方は、こんなものが経費になります</div>
           <div class="exp-row"><b>衣装</b>：お店で着るドレス・スーツ・衣装</div>
