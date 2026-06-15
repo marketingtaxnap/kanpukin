@@ -133,7 +133,7 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .notes p{margin-bottom:4px}
 .notes p:last-child{margin-bottom:0}
 .notes p.warn{color:#d23b3b;font-weight:700}
-.cta-lead{font-size:13.5px;font-weight:700;color:var(--text-sub);line-height:1.6;margin-bottom:14px}
+.cta-lead{font-size:16px;font-weight:800;color:var(--text);line-height:1.55;margin-bottom:14px}
 .notes-bar{text-align:center;margin-top:10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;width:100%}
 .help-icon{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#cfd6dd;color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
 .help-label{font-size:12px;color:var(--text-light)}
@@ -166,6 +166,10 @@ body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text
 .minbox{display:flex;gap:9px;align-items:center;background:#eaf7ef;border-radius:12px;padding:12px 14px;text-align:left}
 .minbox .ic{flex-shrink:0;font-size:17px;line-height:1}
 .minbox .mt{font-size:13px;font-weight:700;color:var(--brand-dark);line-height:1.6}
+.urg-hot{color:#e6342a;font-weight:800}
+.urg-mark{background:linear-gradient(transparent 58%,#ffe14d 58%);font-weight:800;padding:0 1px}
+.urg-warn{display:flex;gap:7px;align-items:flex-start;background:#fff3f1;border:1px solid #ffd5cd;border-radius:10px;padding:11px 13px;margin:14px 0 18px;font-size:12.5px;line-height:1.65;color:#c0392b;font-weight:600}
+.urg-warn b{font-weight:800}
 .hidden{display:none!important}
 </style>
 </head>
@@ -444,12 +448,15 @@ function buildResultHTML(r){
       <div class="result-card cta-card">
         <div class="cta-card-top">
           <div class="grow-icon"><img src="calendar.png" alt=""></div>
-          <div class="grow-text"><div class="cta-lead">もしかしたら、<br>税金を払いすぎているかもしれません</div><div class="cta-head"><span class="hl">確定申告</span>をすることで、<br>お金を取り戻せる可能性があります</div></div>
+          <div class="grow-text"><div class="cta-lead"><span class="urg-mark">税金を払いすぎている</span>可能性があります</div><div class="cta-head">お金を取り戻すために、<br><span class="urg-mark">確定申告をしましょう！</span></div></div>
+        </div>
+        <div style="text-align:center;margin-top:28px;margin-bottom:20px">
+          <div class="pt-lead" style="font-size:11px">タックスナップなら</div>
+          <div class="pt-title" style="font-size:13px"><span class="pt-deco">＼</span>スマホでカンタンに確定申告ができます<span class="pt-deco">／</span></div>
         </div>
         ${CTA('アプリでお金を取り戻す →')}
         <button class="why-btn" onclick="openWhy()"><span class="why-q">?</span><span class="why-label">なんでお金が戻ってくるの？</span></button>
       </div>
-      ${POINTS('アプリでお金を取り戻す →')}
       <div class="result-card grow-card">
         <div class="grow-icon"><img src="piggy.png" alt=""></div>
         <div class="grow-text">
